@@ -1,0 +1,38 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*", "/css/*"]
+  },
+  "routes": [
+    {
+      "route": "/",
+      "allowedRoles": ["anonymous"]
+    }
+  ],
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html"
+    }
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; media-src 'self'",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload"
+  },
+  "proxy": {
+    "routes": [
+      {
+        "route": "/",
+        "origin": "http://92.68.14.177:8080"
+      },
+      {
+        "route": "/api/*",
+        "origin": "http://92.68.14.177:8080"
+      },
+      {
+        "route": "/",
+        "origin": "https://92.68.14.177:4443",
+        "forceHttps": true
+      }
+    ]
+  }
+}
